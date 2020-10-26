@@ -1,3 +1,5 @@
+import { Player } from "../Player";
+
 class Level1 extends Phaser.Scene {
     private map: Phaser.Tilemaps.Tilemap;
 
@@ -91,17 +93,17 @@ class Level1 extends Phaser.Scene {
         }
 
         //// collide with soul check one time add one time and then destroy the specific soul from the map
-        if(this.physics.collide(this.player, this.soulsLayer)) {
-            console.log("Soul collected");
-            this.soulCount++;
+        if(this.physics.overlap(this.player, this.soulsLayer)) {
+            //console.log("Soul collected");
         }
 
         if(this.physics.collide(this.player, this.portalLayer)) {
             console.log("Portal reached");
+            this.scene.start("Level2");
         }
 
         //// same as soul level
-        if(this.physics.collide(this.player, this.chestLayer) && this.soulCount == this.maxSoulsCollected) {
+        if(this.physics.collide(this.player, this.chestLayer)) {
             console.log("Chest collected");
         }
     }

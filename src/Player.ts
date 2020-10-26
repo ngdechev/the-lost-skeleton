@@ -52,6 +52,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(-this.speed);
         }
 
+        //// make it space instead of down
+        if (this.cursors.down.isDown) {
+            this.setVelocityY(-this.speed);
+        }
+
         if (this.updatePlayer) {
             if (this.cursors.left.isDown || this.cursors.right.isDown) {
                 this.anims.play("player_walk", true);
@@ -71,7 +76,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     public update() {
         this.playerMove()
-
     }
 
 }
