@@ -10,6 +10,15 @@ class Preload extends Phaser.Scene {
         this.load.on("progress", this.onProgressUpdated, this);
         this.load.on("load", this.onFileLoaded, this);
         this.load.on("complete", this.onComplete, this);
+
+        this.load.image("background", "assets/images/Background.png");
+        this.load.image("castle", "assets/images/Castle.png");
+        this.load.image("chest", "assets/images/Chest.png");
+        this.load.image("land", "assets/images/Land.png");
+        this.load.image("portal", "assets/images/Portals.png");
+        this.load.image("soul", "assets/images/Souls.png");
+        this.load.image("decoration", "assets/images/Web_Decorations.png");
+        this.load.tilemapTiledJSON("level1", "assets/images/Level1.json");
         
         this.load.start();
 
