@@ -1,0 +1,33 @@
+### JetBrains
+.idea/
+
+### VS Code
+.vscode/
+
+### Node
+node_modules/
+build/
+
+### Logs
+#*.log
+
+### OS
+.DS_Store
+
+### Project specific
+#
+
+*.suo
+*.js.map
+*.js
+
+!rollup.*.js
+!gruntfile.js
+!gulpfile.js
+!*.json
+!sprintf.js
+!*Tests/
+!*test/
+
+### Build
+/dist
