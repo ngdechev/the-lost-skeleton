@@ -13,6 +13,8 @@ class Level1 extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.fadeIn(2000);
+        
         this.map = this.make.tilemap({ key: "level1" });
 
         let backgroundTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Background", "background");
@@ -45,6 +47,24 @@ class Level1 extends Phaser.Scene {
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(this.player);
 
+        // Collions
+        this.physics.add.collider(this.player, landLayer);
+        landLayer.setCollisionByProperty({ collides: true});
+
+        this.physics.add.collider(this.player, overUndergroundLayer);
+        overUndergroundLayer.setCollisionByProperty({ collides: true });
+
+        this.physics.add.collider(this.player, undergroundLayer);
+        undergroundLayer.setCollisionByProperty({ collides: true });
+
+        this.spikeLayer.setCollisionByProperty({ collider: true});
+
+        this.soulsLayer.setCollisionByProperty({ soulCollides: true });
+
+        this.portalLayer.setCollisionByProperty({ portalCollides: true });
+
+        this.chestLayer.setCollisionByProperty({ chestCollides: true });
+
         // //debug
         // landLayer.renderDebug(this.add.graphics(), {
         //     tileColor: null,
@@ -62,6 +82,34 @@ class Level1 extends Phaser.Scene {
         //     faceColor: new Phaser.Display.Color(40, 39, 37, 255)
         // });
 
+    }
+
+    private collisionCheck() {
+        if(this.physics.collide(this.player, this.spikeLayer)) {
+            this.player.destroy();
+            this.scene.restart();
+        }
+
+        //// collide with soul check one time add one time and then destroy the specific soul from the map
+        if(this.physics.collide(this.player, this.soulsLayer)) {
+            console.log("Soul collected");
+            this.soulCount++;
+        }
+
+        if(this.physics.collide(this.player, this.portalLayer)) {
+            console.log("Portal reached");
+        }
+
+        //// same as soul level
+        if(this.physics.collide(this.player, this.chestLayer) && this.soulCount == this.maxSoulsCollected) {
+            console.log("Chest collected");
+        }
+    }
+
+    public update() {
+        this.player.update();
+
+       this.collisionCheck();
     }
 
 }
