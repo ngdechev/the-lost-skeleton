@@ -22,7 +22,7 @@ class Level1 extends Phaser.Scene {
         let backgroundTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Background", "background");
         let castleTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Castle", "castle");
         let chestTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Chest", "chest");
-        let landTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Land", "land");
+        let landTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Decorations", "land");
         let portalTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Portals", "portal");
         let soulTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Souls", "soul");
         let decorationTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Web_Decorations", "decoration");
@@ -34,10 +34,10 @@ class Level1 extends Phaser.Scene {
         let overUndergroundLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Over_Underground", [castleTile, landTile, decorationTile], 0, 0).setDepth(0);
         let landLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Land", castleTile, 0, 0).setDepth(0);
         
-        this.soulsLayer = this.map.createStaticLayer("Souls", soulTile, 0, 0).setDepth(1);
-        this.portalLayer = this.map.createStaticLayer("Portal", portalTile, 0, 0).setDepth(1);
-        this.spikeLayer = this.map.createStaticLayer("Spikes", decorationTile, 0, 0).setDepth(1); 
-        this.chestLayer = this.map.createStaticLayer("Chest", chestTile, 0, 0).setDepth(1); 
+        this.soulsLayer = this.map.createStaticLayer("Souls", soulTile, 0, 0).setDepth(0);
+        this.portalLayer = this.map.createStaticLayer("Portal", portalTile, 0, 0).setDepth(0);
+        this.spikeLayer = this.map.createStaticLayer("Spikes", decorationTile, 0, 0).setDepth(0); 
+        this.chestLayer = this.map.createStaticLayer("Chest", chestTile, 0, 0).setDepth(0); 
 
         this.player = new Player(this, 80, 600);
         this.add.existing(this.player);
@@ -98,7 +98,6 @@ class Level1 extends Phaser.Scene {
         }
 
         if(this.physics.collide(this.player, this.portalLayer)) {
-            console.log("Portal reached");
             this.scene.start("Level2");
         }
 

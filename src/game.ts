@@ -11,7 +11,7 @@ class GameApp extends Phaser.Game {
         GameApp.gameConfig = {
             type: Phaser.AUTO,
             parent: "content",
-            backgroundColor: '#eee',
+            backgroundColor: '#fff',
             width: 1600,
             height: 940,
             physics: {

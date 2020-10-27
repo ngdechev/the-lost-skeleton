@@ -22,13 +22,13 @@ class Level2 extends Phaser.Scene {
         let soulV2tile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Souls", "soulV2");
         let chestTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Chest", "chest");
 
-        let groundLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Ground", tile, 0, 0).setDepth(0);
+        let backgroundLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Background", tile, 0, 0).setDepth(0);
         let decorationsLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Decorations", tile, 0, 0).setDepth(0);
-        let wallsLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Walls", tile, 0, 0).setDepth(1);
+        let wallsLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Walls", tile, 0, 0).setDepth(0);
         
-        this.soulsLayer = this.map.createStaticLayer("Souls", soulV2tile, 0, 0).setDepth(1);
-        this.portalLayer = this.map.createStaticLayer("Portals", tile, 0, 0).setDepth(1);
-        this.chestLayer = this.map.createStaticLayer("Chest", chestTile, 0, 0).setDepth(1); 
+        this.soulsLayer = this.map.createStaticLayer("Souls", soulV2tile, 0, 0).setDepth(0);
+        this.portalLayer = this.map.createStaticLayer("Portals", tile, 0, 0).setDepth(0);
+        this.chestLayer = this.map.createStaticLayer("Chest", chestTile, 0, 0).setDepth(0); 
 
         this.player = new Player(this, 80, 1500);
         this.add.existing(this.player);

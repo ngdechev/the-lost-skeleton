@@ -1,9 +1,12 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
 
     private cursors;
+    private space: Phaser.Input.Keyboard.Key;
 
     private updatePlayer: boolean = true;
     private readonly speed: number = 200;
+    
+    private doublejump: boolean = false;
 
     constructor(scene: Phaser.Scene, x: number, y: number) {
         super(scene, x, y, "player");
@@ -26,6 +29,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         });
 
         this.cursors = this.scene.input.keyboard.createCursorKeys();
+        this.space = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
     }
 
     private setupPlayerEvents(): void {
@@ -50,11 +54,12 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if (this.cursors.up.isDown && this.body.blocked.down) {
             this.setVelocityY(-this.speed);
+            this.doublejump = true;
         }
 
-        //// make it space instead of down
-        if (this.cursors.down.isDown) {
+        if (this.space.isDown && this.doublejump == true) {
             this.setVelocityY(-this.speed);
+            this.doublejump = false;
         }
 
         if (this.updatePlayer) {

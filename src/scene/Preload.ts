@@ -44,7 +44,7 @@ class Preload extends Phaser.Scene {
     private onComplete(): void {
         console.log("load complete");
 
-        this.scene.start("Level1");
+        this.scene.start("Level2");
     }
 }
 
