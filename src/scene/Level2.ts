@@ -7,7 +7,7 @@ class Level2 extends Phaser.Scene {
 
     private soulScore: number = 0;
     private scoreText: Phaser.GameObjects.Text;
-    private readonly maxSouls: number = 10;
+    private readonly maxSouls: number = 11;
     private chestCollected: boolean = false;
     private chestCounter: number = 0;
     private readonly maxChest: number = 1;
