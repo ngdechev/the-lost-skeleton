@@ -4,6 +4,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     private space: Phaser.Input.Keyboard.Key;
 
     private updatePlayer: boolean = true;
+    public isAlive: boolean = true;
+
     private readonly speed: number = 200;
     
     private doublejump: boolean = false;
@@ -76,7 +78,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             } else {
                 this.flipX = false;
             }
+
+            if(this.isAlive == false) this.anims.play("player_death");
         }
+    }
+
+    public get isPlayerAlive() {
+        return this.isAlive;
     }
 
     public update() {

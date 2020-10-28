@@ -14,23 +14,32 @@ class Preload extends Phaser.Scene {
         //// player
         this.load.atlas("player", "assets/images/Skeleton.png", "assets/images/Skeleton.json");
 
+        //// main menu
+        this.load.image("MainMenuBackground", "assets/images/MainMenuBackground.png");
+        this.load.atlas("button", "assets/images/Buttons.png", "assets/images/Buttons.json");
+
         //// level 1 
         this.load.image("background", "assets/images/Background.png");
         this.load.image("castle", "assets/images/Castle.png");
-        this.load.image("chest", "assets/images/Chest.png");
+        this.load.image("chest", "assets/images/chest.png");
         this.load.image("land", "assets/images/Land.png");
-        this.load.image("portal", "assets/images/Portals.png");
         this.load.image("soul", "assets/images/Souls.png");
+        this.load.image("greenPortal", "assets/images/greenPortal.png");
         this.load.image("decoration", "assets/images/Web_Decorations.png");
         this.load.tilemapTiledJSON("level1", "assets/images/Level1.json");
 
         //// level 2
         this.load.image("atlas", "assets/images/Tiles.png");
-        this.load.image("soulV2", "assets/images/SoulsV2.png");
+        //this.load.image("soulV2", "assets/images/SoulsV2.png");
+        this.load.image("newSoul", "assets/images/newSoul.png");
         this.load.tilemapTiledJSON("level2", "assets/images/Level2.json");
+
+        //// Level 3
+        this.load.image("trees", "assets/images/Trees.png");
+        this.load.image("portal", "assets/images/Portals.png");
+        this.load.tilemapTiledJSON("level3", "assets/images/Level3.json");
         
         this.load.start();
-
     }
 
     private onProgressUpdated(value: number): void {
@@ -44,7 +53,7 @@ class Preload extends Phaser.Scene {
     private onComplete(): void {
         console.log("load complete");
 
-        this.scene.start("Level2");
+        this.scene.start("MainMenu");
     }
 }
 

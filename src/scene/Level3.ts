@@ -1,15 +1,16 @@
 import { Player } from "../actors/Player";
-
-class Level1 extends Phaser.Scene {
+ 
+class Level3 extends Phaser.Scene {
     private map: Phaser.Tilemaps.Tilemap;
+
+    private player: Player;
 
     private soulScore: number = 0;
     private scoreText: Phaser.GameObjects.Text;
-    private readonly maxSouls: number = 7;
+    private readonly maxSouls: number = 14;
     private chestCollected: boolean = false;
     private chestCounter: number = 0;
     private readonly maxChest: number = 1;
-    private player: Player;
 
     private soul: any;
     private portal: any;
@@ -19,101 +20,91 @@ class Level1 extends Phaser.Scene {
     private soulsLayer: any;
     private portalLayer: any;
     private chestLayer: any;
-
+ 
     constructor() {
-        super("Level1");
+        super("Level3");
     }
-
+ 
     create() {
         this.cameras.main.fadeIn(2000);
-
-        this.map = this.make.tilemap({ key: "level1" });
-
-        let backgroundTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Background", "background");
+        
+        this.map = this.make.tilemap({ key: "level3" });
+ 
+        let backgroundTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("backGroundd", "background");
         let castleTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Castle", "castle");
-        let landTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Decorations", "land");
-        let decorationTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Web_Decorations", "decoration");
+        let landTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Land", "land");
         let portalTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Portals", "portal");
-
+        let decorationTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Web_Decorations", "decoration");
+        let treesTile: Phaser.Tilemaps.Tileset = this.map.addTilesetImage("Trees", "trees");
+ 
         let backgroundLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Background", backgroundTile, 0, 0).setDepth(0);
-        let mountainBackLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Mountain_Back", backgroundTile, 0, 0).setDepth(0);
         let mountainLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Mountain", backgroundTile, 0, 0).setDepth(0);
-        let undergroundLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Underground", [castleTile, landTile], 0, 0).setDepth(0);
-        let overUndergroundLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Over_Underground", [castleTile, landTile, decorationTile], 0, 0).setDepth(0);
-        let landLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Land", [castleTile, portalTile], 0, 0).setDepth(0);
-        this.spikeLayer = this.map.createStaticLayer("Spikes", decorationTile, 0, 0).setDepth(0);
-
-        let welcomeText: Phaser.GameObjects.Text = this.add.text(150, 450, `Welcome to level 1. \nControl the player with arrows.\nYou have to collect ${this.maxSouls} souls and to open ${this.maxChest} chest.\nHave fun!`, {textShadow: "2px 2px #fff"});
+        let overMountainLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("OverMountain", backgroundTile, 0, 0).setDepth(0);
+        let undergroundLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Underground", castleTile, 0, 0).setDepth(0);
+        let underground2Layer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Underground2", castleTile, 0, 0).setDepth(0);
+        let overgroundLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Overground", [landTile, decorationTile, portalTile], 0, 0).setDepth(1);
+        let landLayer: Phaser.Tilemaps.StaticTilemapLayer = this.map.createStaticLayer("Ground", [castleTile, decorationTile, treesTile ], 0, 0).setDepth(0);
+        this.spikeLayer = this.map.createStaticLayer("Spikes", decorationTile, 0, 0).setDepth(0); 
+ 
+        let welcomeText: Phaser.GameObjects.Text = this.add.text(150, 250, `Welcome to level 3. \nControl the player with arrows.\nYou have to collect ${this.maxSouls} souls and to open ${this.maxChest} chest.\nHave fun!`, {textShadow: "2px 2px #fff"});
         setTimeout(() => {
             welcomeText.destroy();
         }, 5000);
-        
+
         this.soulsLayer = this.map.getObjectLayer("Souls")['objects'];
         this.portalLayer = this.map.getObjectLayer("Portal")['objects'];
         this.chestLayer = this.map.getObjectLayer("Chest")['objects'];
-
+ 
         this.player = new Player(this, 80, 700);
         this.add.existing(this.player);
         this.player.setSize(20, 40);
         this.player.setCollideWorldBounds(true);
-
+ 
         this.cameras.main.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.physics.world.setBounds(0, 0, this.map.widthInPixels, this.map.heightInPixels);
         this.cameras.main.startFollow(this.player);
-
+ 
         this.soul = this.physics.add.staticGroup();
-
         this.soulsLayer.forEach(object => {
-            let obj = this.soul.create(object.x, object.y, "newSoul");
-            obj.body.width = object.width;
-            obj.body.height = object.height;
-            obj.setPositionY += 20;
+            let obj = this.soul.create(object.x, object.y, "newSoul"); 
+               obj.body.width = object.width; 
+               obj.body.height = object.height; 
+               obj.setPositionY += 20;
         });
-
+ 
         this.chest = this.physics.add.staticGroup();
-
         this.chestLayer.forEach(object => {
-            let obj = this.chest.create(object.x, object.y, "chest");
-            obj.body.width = object.width;
-            obj.body.height = object.height;
-            obj.setPositionY += 20;
+            let obj = this.chest.create(object.x, object.y, "chest"); 
+               obj.body.width = object.width; 
+               obj.body.height = object.height; 
+               obj.setPositionY += 20;
         });
-
+ 
         this.portal = this.physics.add.staticGroup();
-
         this.portalLayer.forEach(object => {
-            let obj = this.portal.create(object.x, object.y, "greenPortal");
-            obj.body.width = object.width;
-            obj.body.height = object.height;
-            obj.setPositionY += 20;
-            obj.setScale(0.5);
+            let obj = this.portal.create(object.x, object.y, "greenPortal"); 
+               obj.body.width = object.width; 
+               obj.body.height = object.height; 
         });
-
-        // Collions
+ 
+        // Collions 
         this.physics.add.collider(this.player, landLayer);
-        landLayer.setCollisionByProperty({ collides: true });
-
-        this.physics.add.collider(this.player, overUndergroundLayer);
-        overUndergroundLayer.setCollisionByProperty({ collides: true });
-
-        this.physics.add.collider(this.player, undergroundLayer);
-        undergroundLayer.setCollisionByProperty({ collides: true });
-
+        landLayer.setCollisionByProperty({ stoneCollider: true});
+ 
+        this.spikeLayer.setCollisionByProperty({ spikeCollider: true});
+ 
         this.physics.add.overlap(this.player, this.soul, this.collectSouls, null, this);
-
+ 
         this.physics.add.overlap(this.player, this.chest, this.openChest, null, this);
-
+ 
         this.physics.add.overlap(this.player, this.portal, this.portalCollide, null, this);
-
-        this.spikeLayer.setCollisionByProperty({ collider: true });
-
+ 
         this.scoreText = this.add.text(20, 20, `Souls: ${this.soulScore}`, {
             fontSize: '20px',
             fill: '#ffffff',
-            fontStyle: ""
-        });
-        this.scoreText.setScrollFactor(0);
-
+          });
+          this.scoreText.setScrollFactor(0);
+ 
         // //debug
         // landLayer.renderDebug(this.add.graphics(), {
         //     tileColor: null,
@@ -130,8 +121,9 @@ class Level1 extends Phaser.Scene {
         //     collidingTileColor: new Phaser.Display.Color(243, 134, 48, 255),
         //     faceColor: new Phaser.Display.Color(40, 39, 37, 255)
         // });
+ 
     }
-
+ 
     private collectSouls(player, soul) {
         soul.destroy(soul.x, soul.y); // remove the tile/coin
         this.soulScore++; // increment the score
@@ -181,7 +173,7 @@ class Level1 extends Phaser.Scene {
 
         this.collisionCheck();
     }
-
+ 
 }
-
-export { Level1 }
+ 
+export { Level3 }

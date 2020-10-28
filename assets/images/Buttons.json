@@ -1,0 +1,36 @@
+{"frames": [
+
+{
+	"filename": "oval_button.png",
+	"frame": {"x":0,"y":0,"w":516,"h":242},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":516,"h":242},
+	"sourceSize": {"w":516,"h":242}
+},
+{
+	"filename": "polygon_button.png",
+	"frame": {"x":518,"y":0,"w":516,"h":240},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":516,"h":240},
+	"sourceSize": {"w":516,"h":240}
+},
+{
+	"filename": "square_button.png",
+	"frame": {"x":1036,"y":0,"w":516,"h":229},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":516,"h":229},
+	"sourceSize": {"w":516,"h":229}
+}],
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "Buttons.png",
+	"format": "RGBA8888",
+	"size": {"w":2048,"h":256},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:8f2f45a35914c6cd20f358bbc2026c7d:c9c3aa82ae626236e2f28fc79121f150:3927448dce5de7869762a67ec500bb79$"
+}
+}
