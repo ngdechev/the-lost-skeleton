@@ -142,8 +142,8 @@ class Level3 extends Phaser.Scene {
             let text: Phaser.GameObjects.Text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, `Congrats, you have collected souls ${this.soulScore} souls and opened ${this.chestCounter} chests.`);
             setTimeout(() => {
                 text.destroy();
-                this.scene.start("Level2");
-            }, 2000);
+                this.scene.start("MainMenu");
+            }, 1500);
         } 
         else {
             let text: Phaser.GameObjects.Text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, `You need to collect ${this.maxSouls - this.soulScore} more souls for reaching level 2!`);
@@ -164,7 +164,7 @@ class Level3 extends Phaser.Scene {
                 this.scene.restart();
                 this.soulScore = 0;
                 this.chestCounter = 0;
-            }, 3000);
+            }, 1500);
         }
     }
 

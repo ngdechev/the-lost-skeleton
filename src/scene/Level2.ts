@@ -131,7 +131,7 @@ class Level2 extends Phaser.Scene {
             setTimeout(() => {
                 text.destroy();
                 this.scene.start("Level3");
-            }, 2000);
+            }, 1500);
         } else {
             let text: Phaser.GameObjects.Text = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, `You need to collect ${this.maxSouls - this.soulScore} more souls for reaching level 2!`);
             setTimeout(() => {
